@@ -15,6 +15,7 @@
     <link href="<%= BundleTable.Bundles.ResolveBundleUrl("~/style/print")%>" rel="stylesheet" type="text/css" media="print" />
     <%= Scripts.Render("~/script/core")%>
     <asp:ContentPlaceHolder ID="HeadContent" runat="server" />
+    <script src="/Content/Script/less.js" type="text/javascript"></script>
 </head>
 <body>
     <asp:ContentPlaceHolder ID="MainContent" runat="server" />

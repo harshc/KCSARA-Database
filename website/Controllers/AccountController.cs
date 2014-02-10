@@ -1,23 +1,20 @@
 ﻿namespace Kcsara.Database.Web.Controllers
 {
+    using Kcsar.Membership;
+    using Kcsara.Database.Web;
+    using Kcsara.Database.Web.Model;
     using System;
     using System.Collections.Generic;
+    using System.Data.SqlClient;
+    using System.Globalization;
+    using System.Linq;
     using System.Security.Principal;
     using System.Threading;
     using System.Web.Mvc;
+    using System.Web.Profile;
     using System.Web.Security;
     using System.Web.UI;
-    using System.Linq;
-    using System.Data.SqlClient;
     using Config = System.Configuration;
-    using Kcsar.Database.Model;
-    using Kcsar.Database;
-    using Kcsara.Database.Web.Controllers;
-    using System.Globalization;
-    using Kcsar.Membership;
-    using Kcsara.Database.Web;
-    using System.Web.Profile;
-    using Kcsara.Database.Web.Model;
 
     [OutputCache(Location = OutputCacheLocation.None)]
     public sealed class AccountController : BaseController
@@ -332,33 +329,14 @@
             return View();
         }
 
-        [AcceptVerbs(HttpVerbs.Get)]
-     //   [RequireHttps]
+        [AcceptVerbs(HttpVerbs.Get)]     
         public ActionResult ReAuth()
         {
             return View();
-        }
-
-        //[AcceptVerbs(HttpVerbs.Post)]
-        //[RequireHttps]
-        //public JsonDataContractResult ServiceLogin(string username, string password)
-        //{
-        //    bool success = Provider.ValidateUser(username, password);
-        //    if (success)
-        //    {
-        //        FormsAuth.SetAuthCookie(username, false);
-        //    }
-
-        //    return new JsonDataContractResult(new SubmitResult<bool>
-        //    {
-        //        Errors = new SubmitError[0],
-        //        Result = success
-        //    });
-        //}
+        }       
 
 
-        [AcceptVerbs(HttpVerbs.Post)]
-    //    [RequireHttps]
+        [AcceptVerbs(HttpVerbs.Post)]    
         public ActionResult Login(string username, string password, bool rememberMe, string returnUrl, int? id, int? p)
         {
             ViewData["PageTitle"] = "Login";
@@ -390,16 +368,21 @@
                     {
                         return Redirect(string.Format("{0}://{1}:{2}/{3}", this.Request.Url.Scheme, this.Request.Url.Host, id, returnUrl));
                     }
-                    else if (!String.IsNullOrEmpty(returnUrl))
+                    
+                    if (!String.IsNullOrEmpty(returnUrl))
                     {
                         return Redirect(returnUrl);
                     }
-                    else if (Roles.IsUserInRole(username, api.AccountController.APPLICANT_ROLE))
+                    
+                    if (Roles.IsUserInRole(username, api.AccountController.APPLICANT_ROLE))
                     {
-                        KcsarUserProfile profile = ProfileBase.Create(username) as KcsarUserProfile;
+                        var profile = ProfileBase.Create(username) as KcsarUserProfile;
+                        // TODO: if the user has completed course A -> redirect to training landing page
+                        // else land on course A page.
                         if (!string.IsNullOrWhiteSpace(profile.LinkKey))
                             return RedirectToAction("Detail", "Members", new { id = profile.LinkKey });
                     }
+
                     return RedirectToAction("Index", "Home");
                 }
                 else

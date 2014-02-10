@@ -169,6 +169,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="api\AccountController.cs" />
+    <Compile Include="api\Helpers\ValidationHelpers.cs" />
     <Compile Include="api\Models\MemberUnitDocument.cs" />
     <Compile Include="api\Models\UnitDocument.cs" />
     <Compile Include="api\UnitsController.cs" />
@@ -200,6 +201,9 @@
     <Content Include="App_Readme\Elmah.txt" />
     <Content Include="Content\auth\animals\none.jpg" />
     <Content Include="Content\auth\members\none.jpg" />
+    <Content Include="Content\Common.min.css">
+      <DependentUpon>Common.less</DependentUpon>
+    </Content>
     <Content Include="Content\images\maps\base-e.png" />
     <Content Include="Content\images\maps\clue-e.png" />
     <Content Include="Content\images\maps\found-e.png" />
@@ -227,6 +231,7 @@
     <Compile Include="Controllers\SarEventController.cs" />
     <Compile Include="Controllers\TrainingController.cs" />
     <Compile Include="Controllers\TrainingController_Documents.cs" />
+    <Compile Include="Controllers\TrainingReportsController.cs" />
     <Compile Include="Controllers\UnitsController.cs" />
     <Compile Include="Data\DataActionResult.cs" />
     <Compile Include="Data\JsonDataContractResult.cs" />
@@ -307,7 +312,6 @@
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\common.css" />
     <Content Include="Content\images\added.png" />
     <Content Include="Content\images\badge-grad.png" />
     <Content Include="Content\images\bg-button.png" />
@@ -373,8 +377,10 @@
     <Content Include="Content\script\jquery.tablesorter.js" />
     <Content Include="Content\script\jquery.tmpl.js" />
     <Content Include="Content\script\json2.js" />
+    <Content Include="Content\script\less.js" />
     <Content Include="Content\script\suggest.person.js" />
     <Content Include="Content\script\timepicker.js" />
+    <Content Include="Content\common.css" />
     <Content Include="Content\suggest.css" />
     <Content Include="Content\themes\base\images\animated-overlay.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -447,6 +453,7 @@
     <Content Include="Content\missionready-template.xls" />
     <Content Include="Content\esartraining-template.xls" />
     <Content Include="Content\roster-template.xls" />
+    <Content Include="Content\Common.less" />
     <None Include="Properties\PublishProfiles\Local IIS.pubxml" />
     <None Include="parameters.xml" />
     <Content Include="help\images\new-member-1.jpg" />
@@ -585,6 +592,7 @@
     <Content Include="Views\Training\Edit.aspx" />
     <Content Include="Views\Training\EditCourse.aspx" />
     <Content Include="Views\Training\Eligible.aspx" />
+    <Content Include="Views\Training\Home.aspx" />
     <Content Include="Views\Training\Index.aspx" />
     <Content Include="Views\Training\List.aspx" />
     <Content Include="Views\Training\ReportStatus.aspx" />
@@ -609,7 +617,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Content\Site.css" />
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Shared\Core.Master" />
     <Content Include="Views\Shared\Mobile.Master" />
     <Content Include="Views\Shared\Popup.Master" />
