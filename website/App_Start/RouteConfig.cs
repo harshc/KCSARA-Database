@@ -1,4 +1,7 @@
-﻿using System;
+﻿/*
+ * Copyright 2012-2014 Matthew Cosand
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,12 +19,6 @@ namespace Kcsara.Database.Web
             routes.IgnoreRoute( "{*chartimg}", new { chartimg = @".*/ChartImg\.axd(/.*)?" } ); 
 
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-            routes.MapHttpRoute(
-                "DefaultApi",
-                "api/{controller}/{action}/{id}",
-                new { action = RouteParameter.Optional, id = RouteParameter.Optional }
-            );
 
             routes.MapRoute(
                 name: "Default",

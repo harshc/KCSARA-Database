@@ -1,3 +1,6 @@
+﻿/*
+ * Copyright 2012-2014 Matthew Cosand
+ */
 namespace Kcsara.Database.Web.Migrations
 {
     using System;
@@ -19,7 +22,7 @@ namespace Kcsara.Database.Web.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //
-            //    context.People.AddOrUpdate(
+            //    this.db.People.AddOrUpdate(
             //      p => p.FullName,
             //      new Person { FullName = "Andrew Peters" },
             //      new Person { FullName = "Brice Lambson" },

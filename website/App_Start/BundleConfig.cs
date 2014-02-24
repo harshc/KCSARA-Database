@@ -1,4 +1,7 @@
-﻿using System.Web;
+﻿/*
+ * Copyright 2012-2014 Matthew Cosand
+ */
+using System.Web;
 using System.Web.Optimization;
 
 namespace Kcsara.Database.Web
@@ -17,13 +20,15 @@ namespace Kcsara.Database.Web
                 "~/Content/script/date.js",
                 "~/Content/script/jquery.tablesorter.js",
                 "~/Content/script/timepicker.js",
-                "~/Scripts/knockout-2.3.0.js",
+                "~/Scripts/knockout-3.0.0.js",
                 "~/Scripts/knockout.mapping-latest.js",
                 "~/Content/script/jquery.iframe-transport.js",
                 "~/Content/script/jquery.fileupload.js",
                 "~/Content/script/jquery.fileupload-process.js",
                 "~/Content/script/jquery.fileupload-ui.js",
                 "~/Content/script/jquery.fileupload-jquery-ui-kcsara.js",
+                "~/Scripts/nprogress.js",
+                "~/Scripts/modernizr-*",
 
                 "~/Scripts/ViewModels.js",
                 "~/Content/script/suggest.person.js",
@@ -59,7 +64,8 @@ namespace Kcsara.Database.Web
                 "~/Content/site.css",
                 "~/Content/common.css",
                 "~/Content/suggest.css",
-                "~/Content/jquery.fileupload-ui.css"
+                "~/Content/jquery.fileupload-ui.css",
+                "~/Content/nprogress.css"
                 ));
 
             bundles.Add(new StyleBundle("~/style/print").Include(

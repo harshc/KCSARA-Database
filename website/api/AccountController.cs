@@ -1,4 +1,7 @@
-﻿
+﻿/*
+ * Copyright 2013-2014 Matthew Cosand
+ */
+
 namespace Kcsara.Database.Web.api
 {
     using Kcsara.Database.Web.api.Helpers;
@@ -89,4 +92,62 @@ namespace Kcsara.Database.Web.api
             return false;
         }
     }
+
+    [HttpPost]
+    public bool Verify(AccountVerify data)
+    {
+      if (data == null || string.IsNullOrWhiteSpace(data.Username) || string.IsNullOrWhiteSpace(data.Key))
+        return false;
+
+      var user = membership.GetUser(data.Username, false);
+      if (user != null && data.Key.Equals((user.ProviderUserKey ?? "").ToString(), StringComparison.OrdinalIgnoreCase))
+      {
+        user.IsApproved = true;
+        membership.UpdateUser(user);
+
+        return true;
+      }
+
+      return false;
+    }
+
+    [HttpPost]
+    [Authorize(Roles = "site.accounts")]
+    public object GetInactiveAccounts()
+    {
+      DateTime now = DateTime.Now;
+
+      var members = this.db.Members.Where(f => 
+        f.Id != Guid.Empty
+        && f.Username != null && !f.Username.StartsWith("-")
+        && (f.Status & MemberStatus.Applicant) != MemberStatus.Applicant
+        && !f.Memberships.Any(g => g.Status.IsActive && (g.EndTime == null || g.EndTime > now)))
+        .Select(f => new
+        {
+          Username = f.Username,
+          FirstName = f.FirstName,
+          LastName = f.LastName,
+          Id = f.Id
+        })
+        .OrderBy(f => f.LastName).ThenBy(f => f.FirstName)
+        .ToArray();
+
+      return members;
+    }
+
+    [HttpPost]
+    [Authorize(Roles = "site.accounts")]
+    public bool DisableAccounts(string[] id)
+    {
+      foreach (var name in id)
+      {
+        membership.DeleteUser(name, true);
+        var member = db.Members.Single(f => f.Username == name);
+        member.Username = "-" + member.Username;
+      }
+      db.SaveChanges();
+
+      return true;
+    }
+  }
 }

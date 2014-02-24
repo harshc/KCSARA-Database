@@ -1,8 +1,11 @@
-﻿using System;
+﻿/*
+ * Copyright 2011-2014 Matthew Cosand
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Data.Spatial;
+using System.Data.Entity.Spatial;
 using System.Data.Entity;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
